@@ -8,5 +8,6 @@ module.exports = {
     '/node_modules/',
     '/tests/'
   ],
-  verbose: true
+  verbose: true,
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js']
 }; 

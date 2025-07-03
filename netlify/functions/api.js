@@ -26,6 +26,12 @@ function getIPAddress(req) {
     return clientIP;
   }
   
+  // Check for Netlify's client IP header
+  const netlifyIP = req.headers['x-nf-client-connection-ip'];
+  if (netlifyIP) {
+    return netlifyIP;
+  }
+  
   // Fallback to connection remote address
   return req.connection.remoteAddress || 
          req.socket.remoteAddress || 
@@ -70,8 +76,8 @@ function getSoftware(req) {
   }
 }
 
-// API Routes
-app.get('/whoami', (req, res) => {
+// API Routes - handle both /api/whoami and /whoami
+app.get(['/api/whoami', '/whoami'], (req, res) => {
   try {
     const response = {
       ipaddress: getIPAddress(req),
@@ -87,8 +93,19 @@ app.get('/whoami', (req, res) => {
 });
 
 // Health check endpoint
-app.get('/health', (req, res) => {
+app.get(['/api/health', '/health'], (req, res) => {
   res.json({ status: 'OK', timestamp: new Date().toISOString() });
+});
+
+// Root endpoint for testing
+app.get('/', (req, res) => {
+  res.json({ 
+    message: 'Header Parser API',
+    endpoints: {
+      whoami: '/api/whoami',
+      health: '/api/health'
+    }
+  });
 });
 
 // Error handling middleware
@@ -99,7 +116,10 @@ app.use((err, req, res, next) => {
 
 // 404 handler
 app.use((req, res) => {
-  res.status(404).json({ error: 'Not found' });
+  res.status(404).json({ 
+    error: 'Not found',
+    availableEndpoints: ['/api/whoami', '/api/health']
+  });
 });
 
 // Export the serverless function

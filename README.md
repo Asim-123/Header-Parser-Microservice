@@ -73,16 +73,22 @@ npm run dev
 
 ```
 Header-Parser-Microservice/
-├── server.js              # Main server file
-├── package.json           # Dependencies and scripts
-├── jest.config.js         # Jest configuration
+├── server.js                  # Main server file (for local development)
+├── package.json               # Dependencies and scripts
+├── jest.config.js             # Jest configuration
+├── netlify.toml               # Netlify configuration
 ├── tests/
-│   └── server.test.js     # Test suite
+│   ├── server.test.js         # Test suite for local server
+│   └── netlify.test.js        # Test suite for Netlify functions
+├── netlify/
+│   └── functions/
+│       └── api.js             # Serverless function for Netlify
 ├── public/
-│   ├── index.html         # Main HTML page
-│   ├── styles.css         # CSS styles
-│   └── script.js          # Frontend JavaScript
-└── README.md              # This file
+│   ├── index.html             # Main HTML page
+│   ├── styles.css             # CSS styles
+│   └── script.js              # Frontend JavaScript
+├── README.md                  # This file
+└── NETLIFY_DEPLOYMENT.md      # Netlify deployment guide
 ```
 
 ## How It Works
@@ -135,6 +141,16 @@ npm run dev
 ```bash
 npm start
 ```
+
+### Netlify Deployment
+This project is configured for Netlify deployment. See [NETLIFY_DEPLOYMENT.md](./NETLIFY_DEPLOYMENT.md) for detailed instructions.
+
+Quick deployment:
+1. Push your code to a Git repository
+2. Connect your repository to Netlify
+3. Set build command: `npm run build`
+4. Set publish directory: `public`
+5. Deploy!
 
 ### Environment Variables
 - `PORT` - Server port (default: 3000)

@@ -7,9 +7,16 @@
   NODE_VERSION = "18"
 
 [[redirects]]
+  from = "/api/whoami"
+  to = "/.netlify/functions/whoami"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/api/:splat"
   status = 200
+  force = true
 
 [[redirects]]
   from = "/*"

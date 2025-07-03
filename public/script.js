@@ -44,7 +44,7 @@ async function testAPI() {
     
     try {
         // Use the Netlify function path
-        const response = await fetch('/.netlify/functions/api/whoami');
+        const response = await fetch('/.netlify/functions/whoami');
         
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
