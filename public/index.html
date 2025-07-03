@@ -18,7 +18,7 @@
             <div class="api-section">
                 <h2>API Endpoint</h2>
                 <div class="endpoint">
-                    <code>GET /api/whoami</code>
+                    <code>GET /.netlify/functions/api/whoami</code>
                     <button class="test-btn" onclick="testAPI()">Test API</button>
                 </div>
             </div>
@@ -58,11 +58,11 @@
                 <h2>Example Usage</h2>
                 <div class="example">
                     <h3>cURL</h3>
-                    <pre><code>curl https://your-domain.com/api/whoami</code></pre>
+                    <pre><code>curl https://your-domain.com/.netlify/functions/api/whoami</code></pre>
                 </div>
                 <div class="example">
                     <h3>JavaScript (Fetch)</h3>
-                    <pre><code>fetch('/api/whoami')
+                    <pre><code>fetch('/.netlify/functions/api/whoami')
   .then(response => response.json())
   .then(data => console.log(data));</code></pre>
                 </div>
